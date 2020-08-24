@@ -45,7 +45,7 @@ public class DeviceController {
     // TO DO: test after adding equipment
 
     @ApiOperation(value = "возвращает все сенсоры конкретного оборудования")
-    @GetMapping(value = "/equipment/{equipment_id}/device")
+    @GetMapping(value = "/api/equipment/{equipment_id}/device")
     public ResponseEntity<List<Device>> findDevicesByEquipment(@PathVariable Long equipment_id) {
         Equipment equipment = equipmentRepository.findById(equipment_id).get();
         if (equipment == null) {

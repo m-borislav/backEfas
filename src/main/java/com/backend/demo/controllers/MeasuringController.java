@@ -41,7 +41,7 @@ public class MeasuringController {
     }
 
     @ApiOperation(value = "возвращает все измерения конкретного сенсора")
-    @GetMapping(value = "/device/{device_id}/measuring")
+    @GetMapping(value = "/api/device/{device_id}/measuring")
     public ResponseEntity<List<Measuring>> findMeasuringOnDevice(@PathVariable Long device_id){
         Device device = deviceRepository.findById(device_id).get();
         if (device == null){
