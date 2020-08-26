@@ -62,14 +62,14 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "добавляет новый сенсор")
-    @PostMapping(value = "/device/add", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Device> addNewDevice(@RequestBody Device device) {
+    @PostMapping(value = "/api/equipment/{equipment_id}/device/add", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Device> addNewDevice(@RequestBody Device device, @PathVariable Long equipment_id) {
         Device deviceDetails = deviceService.loadDeviceByPlace(device.getPlace());
 
         if (deviceDetails != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
-            deviceService.addDevice(device);
+            deviceService.addDeviceToEquipment(device, equipment_id);
             return ResponseEntity.ok(device);
         }
 

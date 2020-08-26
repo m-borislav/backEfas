@@ -29,7 +29,7 @@ public class RegisterController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/register", consumes = "application/json;charset=UTF-8", produces = "application/json")
     public ResponseEntity<User> register(@RequestBody User user){
         final UserDetails userDetails = userService.loadUserByUsername(user.getEmail());
 

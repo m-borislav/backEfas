@@ -44,8 +44,10 @@ public class User implements UserDetails {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime tokenExpirationDate;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   // @JsonManagedReference
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Company.class)
+    // @JoinColumn(name = "id")
     private Set<Company> companySet;
 
     private boolean isAccountNonExpired;

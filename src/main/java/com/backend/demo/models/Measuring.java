@@ -34,9 +34,10 @@ public class Measuring {
     @ApiModelProperty(value = "влажность воздуха", example = "75%")
     private double wetness;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_id")
+    //@JsonBackReference
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "device_id")
+    @ManyToOne(targetEntity = Device.class)
     private Device device;
 
     @Override

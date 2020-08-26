@@ -31,13 +31,14 @@ public class Company {
     @Column(name = "location", nullable = false, length = 100)
     private String location;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+   // @JsonBackReference
+    @ManyToOne(targetEntity = User.class)
+   // @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JsonManagedReference
+    // @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Equipment.class)
     private Set<Equipment> equipmentSet;
 
 
@@ -58,6 +59,10 @@ public class Company {
     public String toString() {
         return "Company{" +
                 "id=" + id +  '}';
+    }
+
+    public void addEquipment(Equipment equipment) {
+        this.equipmentSet.add(equipment);
     }
 
 }

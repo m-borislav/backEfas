@@ -34,13 +34,14 @@ public class Device {
     @JoinColumn(name="deviceType_id", unique = true, nullable = false, updatable = false)
     private DeviceType deviceType;*/
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "equipment_id")
+    // @JsonBackReference
+    @ManyToOne(targetEntity = Equipment.class)
+   // @JoinColumn(name = "equipment_id")
     private Equipment equipment;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   // @JsonManagedReference
+    //@OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Measuring.class)
     private Set<Measuring> measuringSet;
 
 
@@ -62,4 +63,6 @@ public class Device {
         return "Device{" +
                 "id=" + id +  '}';
     }
+
+
 }

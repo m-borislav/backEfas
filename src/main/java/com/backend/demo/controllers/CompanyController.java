@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Api(value = "company methods", description = "crud перации с компаниями")
 @RestController
@@ -30,16 +29,18 @@ public class CompanyController {
         this.userRepository = userRepository;
     }
 
-    @ApiOperation(value = "добавить новую компанию")
-    @PostMapping(value = "/api/company/add", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Company> addNewCompany(@RequestBody Company company){
+    //@ApiOperation(value = "добавить новую компанию")
+    @PostMapping(value = "/api/{user_id}/company/add", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Company> addNewCompany(@RequestBody Company company, @PathVariable Long user_id){
         /*Company companyDetails = companyService.loadCompanyById(company.getId());
 
         if (companyDetails != null){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {*/
-            companyService.addCompany(company);
+
+            companyService.addCompanyToUser(company, user_id);
             return ResponseEntity.ok(company);
+
         //}
 
 

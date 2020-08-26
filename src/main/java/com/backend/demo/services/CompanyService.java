@@ -23,17 +23,19 @@ public class CompanyService {
         this.userRepository = userRepository;
     }
 
-    public Company addCompany(Company company){
+    public Company addCompanyToUser(Company company, Long user_id){
         /*Company companyFromDb = companyRepository.findById(company.getId()).get();
 
         if (companyFromDb != null){
             return companyFromDb;
         } else {*/
-            Company newCompany = new Company();
-            newCompany.setName(company.getName());
-            newCompany.setLocation(company.getLocation());
-            companyRepository.save(newCompany);
-            return newCompany;
+            User user = userRepository.findById(user_id).get();
+//            Company newCompany = new Company();
+//            newCompany.setName(company.getName());
+//            newCompany.setLocation(company.getLocation());
+            company.setUser(user);
+            companyRepository.save(company);
+            return company;
         //}
     }
 

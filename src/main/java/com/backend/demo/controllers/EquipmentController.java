@@ -29,14 +29,14 @@ public class EquipmentController {
         this.companyRepository = companyRepository;
     }
 
-    @PostMapping(value = "/equipment/add", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Equipment> addNewEquipment(@RequestBody Equipment equipment){
+    @PostMapping(value = "/api/company/{company_id}/equipment/add", consumes = "application/json;charset=UTF-8", produces = "application/json")
+    public ResponseEntity<Equipment> addNewEquipment(@RequestBody Equipment equipment, @PathVariable Long company_id){
         Equipment equipmentDetails = equipmentService.loadDeviceByLocation(equipment.getLocation());
 
         if (equipmentDetails != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
-            equipmentService.addEquipment(equipment);
+            equipmentService.addEquipmentToCompany(equipment, company_id);
             return ResponseEntity.ok(equipment);
         }
     }

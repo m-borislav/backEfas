@@ -1,6 +1,7 @@
 package com.backend.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -31,13 +32,15 @@ public class Equipment {
     @Column(name = "location", nullable = false, unique = true, length = 50)
     private String location;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id")
+   // @JsonBackReference
+    @ManyToOne(targetEntity = Company.class)
+   // @JoinColumn(name = "company_id")
     private Company company;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // @JsonManagedReference
+    @OneToMany(targetEntity = Device.class)
+   // @JoinColumn(name = "device_id")
+    @JsonIgnore
     private Set<Device> deviceSet;
 
     @Override
@@ -57,5 +60,9 @@ public class Equipment {
     public String toString() {
         return "Equipment{" +
                 "id=" + id +  '}';
+    }
+
+    public void addDevice(Device newDevice) {
+        deviceSet.add(newDevice);
     }
 }
